@@ -7,9 +7,11 @@ ALPHABET = ('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n'
 points = 0
 difficult = 1
 
+# limpa a tela
 def clear_screen():
     os.system('cls' if os.name == 'nt' else 'clear')
 
+# cria sequencia aleatória de acordo ao tamanho indicado por lenght
 def gen_word(lenght):
     if lenght <= len(ALPHABET) and lenght >= 1:
         letters = list(ALPHABET)
@@ -18,16 +20,22 @@ def gen_word(lenght):
         return new_word
     return ''
 
+# incrementador de dificuldade
 def increase_dificult():
     if points % 5 == 0:
         global difficult
         difficult += 1
 
+# loop principal do jogo
+print('Welcome!')
+print('Please see the first word!')
+time.sleep(2)
+
 while True:
     word = gen_word(difficult)
     print(word)
 
-    time.sleep(1)
+    time.sleep(1 + difficult / 2)
     clear_screen()
 
     answer = input('Whats is the word? ')
@@ -36,7 +44,7 @@ while True:
         points += 1
         increase_dificult()
         print(f'Thats right! {points=}')
-        time.sleep(1 + difficult / 2)
+        time.sleep(1)
         clear_screen()
     else:
         print(f'Wrong answare {answer=} =/ {word=}')
