@@ -18,8 +18,10 @@ def clear_screen():
 def gen_word(lenght):
     if lenght <= len(ALPHABET) and lenght >= 1:
         letters = list(ALPHABET)
-        random.shuffle(letters)
-        new_word = ''.join(letters[:lenght])
+        numbers = list(DIGITS)
+        mix = numbers + letters
+        random.shuffle(mix)
+        new_word = ''.join(mix[:lenght])
         return new_word
     return ''
 
@@ -31,6 +33,7 @@ def increase_dificult():
 
 # loop principal do jogo
 print('Welcome!')
+difficult = int(input('Select the difficulty level (1 ~ 26): '))
 print('Please see the first word!')
 sleep(2)
 
