@@ -6,6 +6,7 @@ from time import sleep
 ALPHABET = ('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z')
 DIGITS = ('0','1', '2', '3', '4', '5', '6', '7', '8', '9')
 TIME_DIVISOR = 3
+LEVEL_UP = 5
 
 points = 0
 difficult = 1
@@ -27,13 +28,17 @@ def gen_word(lenght):
 
 # incrementador de dificuldade
 def increase_dificult():
-    if points % 5 == 0:
+    if points % LEVEL_UP == 0:
         global difficult
         difficult += 1
 
 # loop principal do jogo
 print('Welcome!')
-difficult = int(input('Select the difficulty level (1 ~ 26): '))
+try:
+    difficult = int(input('Select the difficulty level (1 ~ 26): '))    
+except ValueError:
+    print('Invalid value, seting random difficulty ...')
+    difficult = random.randint(1,26)
 print('Please see the first word!')
 sleep(2)
 
@@ -47,7 +52,7 @@ while True:
     answer = input('Whats is the word? ')
 
     if answer == word:
-        points += 1
+        points += 1 * difficult
         increase_dificult()
         print(f'Thats right! {points=}')
         sleep(1)
